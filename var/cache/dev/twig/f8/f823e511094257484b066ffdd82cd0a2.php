@@ -79,11 +79,9 @@ class __TwigTemplate_8001adb7ecf1ce7e673e7b1f3fb7a995 extends Template
         // line 8
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_login");
         echo "\" method=\"post\">
-        <input type=\"hidden\" name=\"_csrf_token\" value=\"";
-        // line 9
-        echo twig_escape_filter($this->env, $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken("authenticate"), "html", null, true);
-        echo "\">
-
+";
+        // line 10
+        echo "
         <label for=\"username\">Nom d'utilisateur :</label>
         <input type=\"text\" id=\"username\" name=\"_username\" value=\"";
         // line 12
@@ -117,7 +115,7 @@ class __TwigTemplate_8001adb7ecf1ce7e673e7b1f3fb7a995 extends Template
 
     public function getDebugInfo()
     {
-        return array (  90 => 12,  84 => 9,  80 => 8,  77 => 7,  71 => 5,  68 => 4,  58 => 3,  35 => 1,);
+        return array (  88 => 12,  84 => 10,  80 => 8,  77 => 7,  71 => 5,  68 => 4,  58 => 3,  35 => 1,);
     }
 
     public function getSourceContext()
@@ -130,7 +128,7 @@ class __TwigTemplate_8001adb7ecf1ce7e673e7b1f3fb7a995 extends Template
     {% endif %}
 
     <form action=\"{{ path('app_login') }}\" method=\"post\">
-        <input type=\"hidden\" name=\"_csrf_token\" value=\"{{ csrf_token('authenticate') }}\">
+{#        <input type=\"hidden\" name=\"_csrf_token\" value=\"{{ csrf_token('authenticate') }}\">#}
 
         <label for=\"username\">Nom d'utilisateur :</label>
         <input type=\"text\" id=\"username\" name=\"_username\" value=\"{{ last_username }}\" />

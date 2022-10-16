@@ -88,6 +88,33 @@ class __TwigTemplate_02f9265eb59cf3bb7d08395b215c2839 extends Template
 
         // line 8
         echo "
+    <div class=\"row\">
+        ";
+        // line 10
+        if ($this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN")) {
+            // line 11
+            echo "            <a href=\"";
+            echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("user_create");
+            echo "\" class=\"btn btn-primary\">Créer un utilisateur</a>
+            <a href=\"";
+            // line 12
+            echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("user_list");
+            echo "\" class=\"btn btn-primary\">Liste des utilisateurs</a>
+        ";
+        }
+        // line 14
+        echo "        <a href=\"";
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("task_create");
+        echo "\" class=\"btn btn-success\">Créer une nouvelle tâche</a>
+        <a href=\"";
+        // line 15
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("task_list");
+        echo "\" class=\"btn btn-info\">Consulter la liste des tâches à faire</a>
+        <a href=\"";
+        // line 16
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("task_done");
+        echo "\" class=\"btn btn-secondary\">Consulter la liste des tâches terminées</a>
+    </div>
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -109,7 +136,7 @@ class __TwigTemplate_02f9265eb59cf3bb7d08395b215c2839 extends Template
 
     public function getDebugInfo()
     {
-        return array (  90 => 8,  80 => 7,  69 => 4,  59 => 3,  36 => 1,);
+        return array (  115 => 16,  111 => 15,  106 => 14,  101 => 12,  96 => 11,  94 => 10,  90 => 8,  80 => 7,  69 => 4,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -122,15 +149,15 @@ class __TwigTemplate_02f9265eb59cf3bb7d08395b215c2839 extends Template
 
 {% block body %}
 
-{#    <div class=\"row\">#}
-{#        {% if is_granted(\"ROLE_ADMIN\") %}#}
-{#            <a href=\"{{ path('user_create') }}\" class=\"btn btn-primary\">Créer un utilisateur</a>#}
-{#            <a href=\"{{ path('user_list') }}\" class=\"btn btn-primary\">Liste des utilisateurs</a>#}
-{#        {% endif %}#}
-{#        <a href=\"{{ path('task_create') }}\" class=\"btn btn-success\">Créer une nouvelle tâche</a>#}
-{#        <a href=\"{{ path('task_list') }}\" class=\"btn btn-info\">Consulter la liste des tâches à faire</a>#}
-{#        <a href=\"{{ path('task_done') }}\" class=\"btn btn-secondary\">Consulter la liste des tâches terminées</a>#}
-{#    </div>#}
+    <div class=\"row\">
+        {% if is_granted(\"ROLE_ADMIN\") %}
+            <a href=\"{{ path('user_create') }}\" class=\"btn btn-primary\">Créer un utilisateur</a>
+            <a href=\"{{ path('user_list') }}\" class=\"btn btn-primary\">Liste des utilisateurs</a>
+        {% endif %}
+        <a href=\"{{ path('task_create') }}\" class=\"btn btn-success\">Créer une nouvelle tâche</a>
+        <a href=\"{{ path('task_list') }}\" class=\"btn btn-info\">Consulter la liste des tâches à faire</a>
+        <a href=\"{{ path('task_done') }}\" class=\"btn btn-secondary\">Consulter la liste des tâches terminées</a>
+    </div>
 {% endblock %}
 ", "default/index.html.twig", "C:\\Users\\ebara\\OpenClassrooms\\projet_8_B\\templates\\default\\index.html.twig");
     }

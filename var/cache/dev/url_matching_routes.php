@@ -17,7 +17,12 @@ return [
         '/' => [[['_route' => 'homepage', '_controller' => 'App\\Controller\\DefaultController::indexAction'], null, null, null, false, false, null]],
         '/login' => [[['_route' => 'app_login', '_controller' => 'App\\Controller\\SecurityController::loginAction'], null, null, null, false, false, null]],
         '/login_check' => [[['_route' => 'login_check', '_controller' => 'App\\Controller\\SecurityController::loginCheck'], null, null, null, false, false, null]],
-        '/logout' => [[['_route' => 'logout', '_controller' => 'App\\Controller\\SecurityController::logoutCheck'], null, null, null, false, false, null]],
+        '/logout' => [[['_route' => 'logout', '_controller' => 'App\\Controller\\SecurityController::logoutCheck'], null, ['GET' => 0], null, false, false, null]],
+        '/tasks' => [[['_route' => 'task_list', '_controller' => 'App\\Controller\\TaskController::listAction'], null, null, null, false, false, null]],
+        '/tasksDone' => [[['_route' => 'task_done', '_controller' => 'App\\Controller\\TaskController::listTasksDone'], null, null, null, false, false, null]],
+        '/tasks/create' => [[['_route' => 'task_create', '_controller' => 'App\\Controller\\TaskController::createAction'], null, null, null, false, false, null]],
+        '/admin/users' => [[['_route' => 'user_list', '_controller' => 'App\\Controller\\UserController::listAction'], null, null, null, false, false, null]],
+        '/admin/users/create' => [[['_route' => 'user_create', '_controller' => 'App\\Controller\\UserController::createAction'], null, null, null, false, false, null]],
     ],
     [ // $regexpList
         0 => '{^(?'
@@ -36,6 +41,12 @@ return [
                         .'|(*:159)'
                     .')'
                 .')'
+                .'|/tasks/([^/]++)/(?'
+                    .'|edit(*:192)'
+                    .'|toggle(*:206)'
+                    .'|delete(*:220)'
+                .')'
+                .'|/admin/users/([^/]++)/edit(*:255)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -45,8 +56,12 @@ return [
         116 => [[['_route' => '_profiler_router', '_controller' => 'web_profiler.controller.router::panelAction'], ['token'], null, null, false, false, null]],
         136 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
         149 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
-        159 => [
-            [['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null],
+        159 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
+        192 => [[['_route' => 'task_edit', '_controller' => 'App\\Controller\\TaskController::editAction'], ['id'], null, null, false, false, null]],
+        206 => [[['_route' => 'task_toggle', '_controller' => 'App\\Controller\\TaskController::toggleTaskAction'], ['id'], null, null, false, false, null]],
+        220 => [[['_route' => 'task_delete', '_controller' => 'App\\Controller\\TaskController::deleteTaskAction'], ['id'], null, null, false, false, null]],
+        255 => [
+            [['_route' => 'user_edit', '_controller' => 'App\\Controller\\UserController::editAction'], ['id'], null, null, false, false, null],
             [null, null, null, null, false, false, 0],
         ],
     ],
