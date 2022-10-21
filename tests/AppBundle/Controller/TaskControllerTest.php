@@ -84,8 +84,7 @@ class TaskControllerTest extends WebTestCase
             'task[content]' => 'Bonjour'
         ]);
         $client->submit($form);
-
-        $this->assertMatchesRegularExpression('/\/tasks/create/',$client->getResponse()->headers->get('Location'));
+        $this->assertNull($client->getResponse()->headers->get('Location'));
     }
 
     /**
@@ -93,30 +92,30 @@ class TaskControllerTest extends WebTestCase
      */
     public function testAccessEditTaskNoAuthUser() {
         $client = $this->getClientNoAuth();
-        $taskId = $client->getContainer()->get('doctrine')->getRepository(Task::class)->findOneBy(['title' => 'Test anonyme'])->getId();
+        $taskId = $client->getContainer()->get('doctrine')->getRepository(Task::class)->findOneBy(['title' => 'test'])->getId();
 
         $client->request('GET', '/tasks/'. $taskId . '/edit');
         $this->assertMatchesRegularExpression('/\/login/',$client->getResponse()->headers->get('Location'));
     }
 
     /**
-     * Test edit task auth user that does not belong to him
+     * Test edit no task auth user 
      */
     public function testAccessEditTaskAuthUser() {
         $client = $this->getClientUser();
-        $taskId = $client->getContainer()->get('doctrine')->getRepository(Task::class)->findOneBy(['title' => 'Test anonyme'])->getId();
+        $taskId = $client->getContainer()->get('doctrine')->getRepository(Task::class)->findOneBy(['title' => 'xss'])->getId();
 
         $client->request('GET', '/tasks/'. $taskId . '/edit');
         $this->assertMatchesRegularExpression('/\/tasks/',$client->getResponse()->headers->get('Location'));
     }
 
-    // Ici
     /**
+     * Si erreur, regarder si la tâche possède tjrs le même titre
      * Test user edit his own task
      */
     public function testAccessEditTaskAuthUserWithRight() {
         $client = $this->getClientAdmin();
-        $taskId = $client->getContainer()->get('doctrine')->getRepository(Task::class)->findOneBy(['title' => 'Test anonyme'])->getId();
+        $taskId = $client->getContainer()->get('doctrine')->getRepository(Task::class)->findOneBy(['title' => 'testAdmin'])->getId();
 
             $crawler = $client->request('GET', '/tasks/'. $taskId . '/edit');
         $form = $crawler->selectButton('Modifier')->form([
@@ -146,7 +145,7 @@ class TaskControllerTest extends WebTestCase
     public function testDeleteTaskNoAuth() {
         $client = $this->getClientNoAuth();
 
-        $task = $client->getContainer()->get('doctrine')->getRepository(Task::class)->findOneBy(['title' => 'ervin'])->getId();
+        $task = $client->getContainer()->get('doctrine')->getRepository(Task::class)->findOneBy(['title' => 'test'])->getId();
 
         $client->request('GET', '/tasks/'. $task . '/delete');
         $this->assertMatchesRegularExpression('/\/login/',$client->getResponse()->headers->get('Location'));
@@ -159,7 +158,7 @@ class TaskControllerTest extends WebTestCase
     public function testDeleteTaskNoAuthorUser() {
         $client = $this->getClientAdmin();
 
-        $task = $client->getContainer()->get('doctrine')->getRepository(Task::class)->findOneBy(['title' => 'ervin']);
+        $task = $client->getContainer()->get('doctrine')->getRepository(Task::class)->findOneBy(['title' => 'test']);
         $taskId = $task->getId();
 
         $client->request('GET', '/tasks/'. $taskId . '/delete');

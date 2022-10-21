@@ -52,13 +52,12 @@ class SecurityControllerTest extends WebTestCase
     }
 
     /**
-     * Test d'accès à une page liée à l'administration
+     * Test d'accès à une page liée à l'administration en étant user
      */
     public function testAccessToAdminPage()
     {
         $crawler = $this->client->request('GET', '/admin/users');
-        $this->assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
-        $this->assertSame('Liste des utilisateurs', $crawler->filter('h1')->text());
+        $this->assertSame(Response::HTTP_FOUND, $this->client->getResponse()->getStatusCode());
     }
 
 
