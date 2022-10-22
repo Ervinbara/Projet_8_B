@@ -836,3 +836,16 @@ cec22f,::1,POST,http://localhost:8000/admin/users/5/edit,1666367106,,302
 be1804,::1,GET,http://localhost:8000/tasks,1666367604,,200
 1d0bc3,::1,GET,http://localhost:8000/tasks/1/edit,1666367608,,302
 b21b15,::1,GET,http://localhost:8000/tasks,1666367608,,200
+cae3eb,::1,GET,http://localhost:8000/,1666443721,,302
+cd81d9,::1,GET,http://localhost:8000/login,1666443721,,200
+69ae3d,::1,POST,http://localhost:8000/login,1666443767,,302
+073fc5,::1,GET,http://localhost:8000/,1666443767,,200
+4d0807,::1,GET,http://localhost:8000/admin/users/create,1666443772,,200
+b952a2,::1,GET,http://localhost:8000/admin/users/create,1666444536,,302
+559625,::1,GET,http://localhost:8000/login,1666444536,,200
+7bfa26,::1,POST,http://localhost:8000/login,1666444539,,302
+5a20f6,::1,GET,http://localhost:8000/admin/users/create,1666444539,,200
+aee486,::1,GET,http://localhost:8000/,1666444548,,200
+abba76,::1,GET,http://localhost:8000/tasks/create,1666444550,,200
+998bc1,::1,GET,http://localhost:8000/,1666444553,,200
+b2a6dd,::1,GET,http://localhost:8000/admin/users/create,1666445096,,200

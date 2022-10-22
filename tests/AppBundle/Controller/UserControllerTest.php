@@ -93,7 +93,7 @@ class UserControllerTest extends WebTestCase
         $form['user_edit[email]'] = 'anypass@gmail.com';
         // $form->disableValidation();
         $form->setValues(['user_edit' => [
-            'roles' => ['ROLE_USER'] // it uses the input value to determine which checkbox to tick
+            'roles' => ['ROLE_USER'], // it uses the input value to determine which checkbox to tick
         ]]);
         $client->submit($form);
         $this->assertMatchesRegularExpression('/\/users/',$client->getResponse()->headers->get('Location'));

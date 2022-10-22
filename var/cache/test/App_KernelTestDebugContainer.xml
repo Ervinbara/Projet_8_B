@@ -195,6 +195,7 @@
     <parameter key="doctrine.migrations.preferred_connection">null</parameter>
     <parameter key="twig.form.resources" type="collection">
       <parameter>form_div_layout.html.twig</parameter>
+      <parameter>bootstrap_4_layout.html.twig</parameter>
     </parameter>
     <parameter key="twig.default_path">C:\Users\ebara\OpenClassrooms\projet_8_B/templates</parameter>
     <parameter key="security.role_hierarchy.roles" type="collection"/>
