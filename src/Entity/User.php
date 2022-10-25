@@ -98,9 +98,14 @@ class User implements UserInterface,PasswordAuthenticatedUserInterface
     public function getRoles():array
     {
         // Par défaut un nouvel utilisateur aura le rôle USER
-        $roles = $this->roles;
-        $roles[] = 'ROLE_USER';
-        return array_unique($roles);
+        return $this->roles;
+        // $roles = $this->roles;
+        // $roles[] = 'ROLE_USER';
+        // return array_unique($roles);
+    }
+
+    public function setRoles($roles){
+        $this->roles = $roles;
     }
 
     public function eraseCredentials()

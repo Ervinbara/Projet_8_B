@@ -1,5 +1,8 @@
 Projet 8 OpenClassrooms : ToDo & Co
 
+AUTHOR.... 
+Badge symfony, code coverage ect ...
+
 L'objectif de ce projet à été d'améliorer une applications existante.
 
 

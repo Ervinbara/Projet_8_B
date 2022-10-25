@@ -18,6 +18,7 @@
       <parameter key="SecurityBundle">Symfony\Bundle\SecurityBundle\SecurityBundle</parameter>
       <parameter key="MonologBundle">Symfony\Bundle\MonologBundle\MonologBundle</parameter>
       <parameter key="SensioFrameworkExtraBundle">Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle</parameter>
+      <parameter key="DoctrineFixturesBundle">Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle</parameter>
     </parameter>
     <parameter key="kernel.bundles_metadata" type="collection">
       <parameter key="FrameworkBundle" type="collection">
@@ -55,6 +56,10 @@
       <parameter key="SensioFrameworkExtraBundle" type="collection">
         <parameter key="path">C:\Users\ebara\OpenClassrooms\projet_8_B\vendor\sensio\framework-extra-bundle\src</parameter>
         <parameter key="namespace">Sensio\Bundle\FrameworkExtraBundle</parameter>
+      </parameter>
+      <parameter key="DoctrineFixturesBundle" type="collection">
+        <parameter key="path">C:\Users\ebara\OpenClassrooms\projet_8_B\vendor\doctrine\doctrine-fixtures-bundle</parameter>
+        <parameter key="namespace">Doctrine\Bundle\FixturesBundle</parameter>
       </parameter>
     </parameter>
     <parameter key="kernel.charset">UTF-8</parameter>
@@ -334,6 +339,10 @@
       <call method="setContainer">
         <argument type="service" id=".service_locator.jIxfAsi.App\Controller\UserController"/>
       </call>
+    </service>
+    <service id="App\DataFixtures\AppFixtures" class="App\DataFixtures\AppFixtures" autowire="true" autoconfigure="true">
+      <tag name="doctrine.fixture.orm"/>
+      <argument type="service" id="security.user_password_hasher"/>
     </service>
     <service id="App\Form\TaskType" class="App\Form\TaskType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
@@ -1447,6 +1456,7 @@
     <service id="test.private_services_locator" class="Symfony\Component\DependencyInjection\ServiceLocator" public="true">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="App\DataFixtures\AppFixtures" type="service_closure" id="App\DataFixtures\AppFixtures" on-invalid="ignore_uninitialized"/>
         <argument key="App\Form\TaskType" type="service_closure" id="App\Form\TaskType" on-invalid="ignore_uninitialized"/>
         <argument key="App\Form\UserEditType" type="service_closure" id="App\Form\UserEditType" on-invalid="ignore_uninitialized"/>
         <argument key="App\Form\UserType" type="service_closure" id="App\Form\UserType" on-invalid="ignore_uninitialized"/>
@@ -1979,6 +1989,9 @@
         <argument key="sensio_framework_extra.security.expression_language.default" type="service_closure" id="sensio_framework_extra.security.expression_language.default" on-invalid="ignore_uninitialized"/>
         <argument key="framework_extra_bundle.event.is_granted" type="service_closure" id="framework_extra_bundle.event.is_granted" on-invalid="ignore_uninitialized"/>
         <argument key="framework_extra_bundle.argument_name_convertor" type="service_closure" id="framework_extra_bundle.argument_name_convertor" on-invalid="ignore_uninitialized"/>
+        <argument key="doctrine.fixtures_load_command" type="service_closure" id="doctrine.fixtures_load_command" on-invalid="ignore_uninitialized"/>
+        <argument key="doctrine.fixtures.loader" type="service_closure" id="doctrine.fixtures.loader" on-invalid="ignore_uninitialized"/>
+        <argument key="doctrine.fixtures.purger.orm_purger_factory" type="service_closure" id="doctrine.fixtures.purger.orm_purger_factory" on-invalid="ignore_uninitialized"/>
         <argument key="debug.argument_resolver.backed_enum_resolver" type="service_closure" id="debug.argument_resolver.backed_enum_resolver" on-invalid="ignore_uninitialized"/>
         <argument key="debug.argument_resolver.datetime" type="service_closure" id="debug.argument_resolver.datetime" on-invalid="ignore_uninitialized"/>
         <argument key="debug.argument_resolver.request_attribute" type="service_closure" id="debug.argument_resolver.request_attribute" on-invalid="ignore_uninitialized"/>
@@ -2662,6 +2675,7 @@
           <argument>C:\Users\ebara\OpenClassrooms\projet_8_B\vendor\symfony\security-bundle/translations</argument>
           <argument>C:\Users\ebara\OpenClassrooms\projet_8_B\vendor\symfony\monolog-bundle/translations</argument>
           <argument>C:\Users\ebara\OpenClassrooms\projet_8_B\vendor\sensio\framework-extra-bundle\src/translations</argument>
+          <argument>C:\Users\ebara\OpenClassrooms\projet_8_B\vendor\doctrine\doctrine-fixtures-bundle/translations</argument>
         </argument>
         <argument key="cache_vary" type="collection">
           <argument key="scanned_directories" type="collection">
@@ -2678,6 +2692,7 @@
             <argument>C:\Users\ebara\OpenClassrooms\projet_8_B\vendor\symfony\security-bundle/translations</argument>
             <argument>C:\Users\ebara\OpenClassrooms\projet_8_B\vendor\symfony\monolog-bundle/translations</argument>
             <argument>C:\Users\ebara\OpenClassrooms\projet_8_B\vendor\sensio\framework-extra-bundle\src/translations</argument>
+            <argument>C:\Users\ebara\OpenClassrooms\projet_8_B\vendor\doctrine\doctrine-fixtures-bundle/translations</argument>
           </argument>
         </argument>
       </argument>
@@ -5810,13 +5825,6 @@
         <argument>null</argument>
       </call>
       <call method="add">
-        <argument type="service" id=".security.request_matcher.a7qmmbC"/>
-        <argument type="collection">
-          <argument>PUBLIC_ACCESS</argument>
-        </argument>
-        <argument>null</argument>
-      </call>
-      <call method="add">
         <argument type="service" id=".security.request_matcher.5dJADCx"/>
         <argument type="collection">
           <argument>ROLE_ADMIN</argument>
@@ -5826,7 +5834,7 @@
       <call method="add">
         <argument type="service" id=".security.request_matcher.PhQgZ9B"/>
         <argument type="collection">
-          <argument>ROLE_USER</argument>
+          <argument>IS_AUTHENTICATED_FULLY</argument>
         </argument>
         <argument>null</argument>
       </call>
@@ -6348,9 +6356,6 @@
     <service id=".security.request_matcher.QWkwKV5" class="Symfony\Component\HttpFoundation\RequestMatcher">
       <argument>^/login</argument>
     </service>
-    <service id=".security.request_matcher.a7qmmbC" class="Symfony\Component\HttpFoundation\RequestMatcher">
-      <argument>^/users</argument>
-    </service>
     <service id=".security.request_matcher.5dJADCx" class="Symfony\Component\HttpFoundation\RequestMatcher">
       <argument>^/admin</argument>
     </service>
@@ -6516,6 +6521,32 @@
     <service id="framework_extra_bundle.argument_name_convertor" class="Sensio\Bundle\FrameworkExtraBundle\Request\ArgumentNameConverter">
       <argument type="service" id="argument_metadata_factory"/>
     </service>
+    <service id="doctrine.fixtures_load_command" class="Doctrine\Bundle\FixturesBundle\Command\LoadDataFixturesDoctrineCommand">
+      <tag name="console.command" command="doctrine:fixtures:load"/>
+      <tag name="container.no_preload"/>
+      <argument type="service" id="doctrine.fixtures.loader"/>
+      <argument type="service" id="doctrine"/>
+      <argument type="collection">
+        <argument key="default" type="service" id="doctrine.fixtures.purger.orm_purger_factory"/>
+      </argument>
+      <call method="setName">
+        <argument>doctrine:fixtures:load</argument>
+      </call>
+    </service>
+    <service id="doctrine.fixtures.loader" class="Doctrine\Bundle\FixturesBundle\Loader\SymfonyFixturesLoader">
+      <argument type="service" id="service_container"/>
+      <call method="addFixtures">
+        <argument type="collection">
+          <argument type="collection">
+            <argument key="fixture" type="service" id="App\DataFixtures\AppFixtures"/>
+            <argument key="groups" type="collection"/>
+          </argument>
+        </argument>
+      </call>
+    </service>
+    <service id="doctrine.fixtures.purger.orm_purger_factory" class="Doctrine\Bundle\FixturesBundle\Purger\ORMPurgerFactory">
+      <tag name="doctrine.fixtures.purger_factory" alias="default"/>
+    </service>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\DefaultController" class="App\Controller\DefaultController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\DefaultController" class="App\Controller\DefaultController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\DefaultController" class="App\Controller\DefaultController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -6528,6 +6559,8 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\UserController" class="App\Controller\UserController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\UserController" class="App\Controller\UserController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\UserController" class="App\Controller\UserController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\FixturesBundle\ORMFixtureInterface.0.App\DataFixtures\AppFixtures" class="App\DataFixtures\AppFixtures" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\DataFixtures\AppFixtures" class="App\DataFixtures\AppFixtures" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\TaskType" class="App\Form\TaskType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\TaskType" class="App\Form\TaskType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\UserEditType" class="App\Form\UserEditType" autowire="true" abstract="true"/>
@@ -7579,7 +7612,7 @@
     </service>
     <service id="console.command_loader" class="Symfony\Component\Console\CommandLoader\ContainerCommandLoader" public="true">
       <tag name="container.no_preload"/>
-      <argument type="service" id=".service_locator.E649FBw"/>
+      <argument type="service" id=".service_locator.5GkZFOg"/>
       <argument type="collection">
         <argument key="about">console.command.about</argument>
         <argument key="assets:install">console.command.assets_install</argument>
@@ -7656,9 +7689,10 @@
         <argument key="lint:twig">twig.command.lint</argument>
         <argument key="debug:firewall">security.command.debug_firewall</argument>
         <argument key="security:hash-password">security.command.user_password_hash</argument>
+        <argument key="doctrine:fixtures:load">doctrine.fixtures_load_command</argument>
       </argument>
     </service>
-    <service id=".service_locator.E649FBw" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.5GkZFOg" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="console.command.about" type="service_closure" id=".console.command.about.lazy"/>
@@ -7736,6 +7770,7 @@
         <argument key="twig.command.lint" type="service_closure" id=".twig.command.lint.lazy"/>
         <argument key="security.command.debug_firewall" type="service_closure" id=".security.command.debug_firewall.lazy"/>
         <argument key="security.command.user_password_hash" type="service_closure" id=".security.command.user_password_hash.lazy"/>
+        <argument key="doctrine.fixtures_load_command" type="service_closure" id="doctrine.fixtures_load_command"/>
       </argument>
     </service>
     <service id="cache.app.recorder_inner" class="Symfony\Component\Cache\Adapter\FilesystemAdapter">

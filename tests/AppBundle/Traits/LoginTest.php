@@ -9,7 +9,7 @@ trait LoginTest
     {
         $client = static::createClient();
         $userRepository = static::getContainer()->get(UserRepository::class);
-        $testUser = $userRepository->findOneByEmail('ervin@gmail.com');
+        $testUser = $userRepository->findOneByEmail('user@gmail.com');
         $client->loginUser($testUser);
         return $client;
     }
@@ -18,7 +18,7 @@ trait LoginTest
     {
         $client = static::createClient();
         $userRepository = static::getContainer()->get(UserRepository::class);
-        $testUser = $userRepository->findOneByEmail('a@gmail.com');
+        $testUser = $userRepository->findOneByEmail('admin@gmail.com');
         $client->loginUser($testUser);
         return $client;
     }

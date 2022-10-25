@@ -50,7 +50,7 @@ class taskVoter extends Voter
             return false;
         }
 
-        if ($this->decisionManager->decide($token, ['ROLE_ADMIN']) && $task->getAuthor()->getUsername() === "anonyme") {
+        if ($this->decisionManager->decide($token, ['ROLE_ADMIN']) && $task->getAuthor()->getUsername() === "userAnonyme") {
             return true;
         }
         // you know $task is a Post object, thanks to `supports()`

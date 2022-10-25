@@ -39,17 +39,14 @@ class UserControllerTest extends WebTestCase
         $client = $this->getClientAdmin();
         $crawler = $client->request('GET', '/admin/users/create');
         $form = $crawler->selectButton('Ajouter')->form([
-            'user[username]' => 'Benitotodszfefdeddsddsdsssqaqassto',
+            'user[username]' => 'Test12345',
             'user[password][first]' => 'Bonjour',
             'user[password][second]' => 'Bonjour',
-            'user[email]' => 'Benitodsfdfdfdsdsdqsssaqatoto@gmail.com',
+            'user[email]' => 'Test12345@gmail.com',
         ]);
         $client->submit($form);
-        // $this->assertResponseRedirects('/admin/users');
-        // $this->client->followRedirect();
-        // $this->assertSelectorExists('.alert.alert-success');
-        // $this->assertSame(Response::HTTP_OK, $client->getResponse()->getStatusCode());
-        $this->assertMatchesRegularExpression('/\/admin/users/',$client->getResponse()->headers->get('Location'));
+        
+        $this->assertMatchesRegularExpression('/\/admin\/users/',$client->getResponse()->headers->get('Location'));
     }
 
 
@@ -61,7 +58,7 @@ class UserControllerTest extends WebTestCase
             'user[username]' => null,
             'user[password][first]' => 'Bonjour',
             'user[password][second]' => 'Bonjour',
-            'user[email]' => 'beniiitoo@gmail.com',
+            'user[email]' => 'TestCreateEmptyData@gmail.com',
         ]);
         $client->submit($form);
 //        $this->assertSelectorExists('.help-block');
@@ -73,28 +70,27 @@ class UserControllerTest extends WebTestCase
         $client = $this->getClientAdmin();
         $crawler = $client->request('GET', '/admin/users/create');
         $form = $crawler->selectButton('Ajouter')->form([
-            'user[username]' => 'ervin',
+            'user[username]' => 'Test12345',
             'user[password][first]' => 'Bonjour',
             'user[password][second]' => 'Bonjour',
-            'user[email]' => 'beniiitoo@gmail.com',
+            'user[email]' => 'Test12345@gmail.com',
         ]);
         $client->submit($form);
         $this->assertNull($client->getResponse()->headers->get('Location'));
     }
 
-    // TODO : Voir comment décocher une checkbox avant validation du formulaire
     public function testUpdateUserAuthAdminFullData()
     {
         $client = $this->getClientAdmin();
-        $userId = $client->getContainer()->get('doctrine')->getRepository(User::class)->findOneByUsername('symfonyfan')->getId();
+        $userId = $client->getContainer()->get('doctrine')->getRepository(User::class)->findOneByUsername('user2')->getId();
         $crawler = $client->request('GET', '/admin/users/'.$userId.'/edit');
         $form = $crawler->selectButton('Modifier')->form();
-        $form['user_edit[username]'] = 'symfonyfan';
+        $form['user_edit[username]'] = 'user2';
         $form['user_edit[email]'] = 'anypass@gmail.com';
-        // $form->disableValidation();
-        $form->setValues(['user_edit' => [
-            'roles' => ['ROLE_USER'], // it uses the input value to determine which checkbox to tick
-        ]]);
+        
+        $form['user_edit[roles][1]']->tick();
+        $form['user_edit[roles][0]']->untick();
+
         $client->submit($form);
         $this->assertMatchesRegularExpression('/\/users/',$client->getResponse()->headers->get('Location'));
     }
@@ -103,7 +99,7 @@ class UserControllerTest extends WebTestCase
     public function testUpdateUserAuthAdminEmptyData()
     {
         $client = $this->getClientAdmin();
-        $userId = $client->getContainer()->get('doctrine')->getRepository(User::class)->findOneByUsername('symfonyfan')->getId();
+        $userId = $client->getContainer()->get('doctrine')->getRepository(User::class)->findOneByUsername('user')->getId();
         $crawler = $client->request('GET', '/admin/users/'.$userId.'/edit');
         $form = $crawler->selectButton('Modifier')->form([
             'user_edit[username]' => '',
