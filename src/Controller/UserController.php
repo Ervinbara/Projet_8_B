@@ -7,10 +7,10 @@ use App\Form\UserEditType;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Routing\Annotation\Route;
 
 
 /**
@@ -55,7 +55,7 @@ class UserController extends AbstractController
     /**
      * @Route("/users/{id}/edit", name="user_edit")
      */
-    public function editAction(User $user, Request $request,EntityManagerInterface $manager,UserPasswordHasherInterface $passwordHasher)
+    public function editAction(User $user, Request $request, EntityManagerInterface $manager, UserPasswordHasherInterface $passwordHasher)
     {
         $form = $this->createForm(UserEditType::class, $user);
 

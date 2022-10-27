@@ -36,7 +36,7 @@ class TaskController extends AbstractController
     /**
      * @Route("/tasks/create", name="task_create")
      */
-    public function createAction(Request $request,EntityManagerInterface $manager)
+    public function createAction(Request $request, EntityManagerInterface $manager)
     {
         $task = new Task();
         $task->setAuthor($this->getUser());
@@ -86,11 +86,11 @@ class TaskController extends AbstractController
      */
     public function toggleTaskAction(Task $task, EntityManagerInterface $manager)
     {
-        if(!$task->isDone()){
+        if (!$task->isDone()) {
             $task->toggle(!$task->isDone());
             $manager->flush();
             $this->addFlash('success', sprintf('La tâche %s a bien été marquée comme faite.', $task->getTitle()));
-        }else{
+        } else {
             $task->toggle($task->isDone());
             $manager->flush();
             $this->addFlash('success', sprintf('La tâche %s a bien été marquée comme non faite.', $task->getTitle()));
