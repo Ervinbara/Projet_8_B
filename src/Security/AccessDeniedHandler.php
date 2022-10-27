@@ -19,8 +19,6 @@ class AccessDeniedHandler implements AccessDeniedHandlerInterface
 
    public function handle(Request $request, AccessDeniedException $accessDeniedException): ?Response
    {
-    //    $content = "Erreur : Cette page n'existe pas =(";
-    //    return new Response($content, 404);
     return new RedirectResponse($this->urlGenerator->generate('homepage'));
    }
 }

@@ -7,7 +7,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
-class taskVoter extends Voter
+class TaskVoter extends Voter
 {
     // these strings are just invented: you can use anything
     const TASK_EDIT = 'task_edit';
