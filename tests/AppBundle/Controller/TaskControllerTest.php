@@ -2,8 +2,8 @@
 
 namespace App\Tests\AppBundle\Controller;
 
-use App\Tests\AppBundle\Traits\LoginTest;
 use App\Entity\Task;
+use App\Tests\AppBundle\Traits\LoginTest;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -119,7 +119,7 @@ class TaskControllerTest extends WebTestCase
 
             $crawler = $client->request('GET', '/tasks/'. $taskId . '/edit');
         $form = $crawler->selectButton('Modifier')->form([
-            'task[title]' => 'Test anonyme',
+            'task[title]' => 'testUserA',
             'task[content]' => 'azerty'
         ]);
         $client->submit($form);
@@ -145,7 +145,7 @@ class TaskControllerTest extends WebTestCase
     public function testDeleteTaskNoAuth() {
         $client = $this->getClientNoAuth();
 
-        $task = $client->getContainer()->get('doctrine')->getRepository(Task::class)->findOneBy(['title' => 'Test anonyme'])->getId();
+        $task = $client->getContainer()->get('doctrine')->getRepository(Task::class)->findOneBy(['title' => 'Test anonyme 2'])->getId();
 
         $client->request('GET', '/tasks/'. $task . '/delete');
         $this->assertMatchesRegularExpression('/\/login/',$client->getResponse()->headers->get('Location'));
@@ -153,12 +153,12 @@ class TaskControllerTest extends WebTestCase
     }
 
     /**
-     * User trying to delete a task that does not belong to him
+     * Admin trying to delete anonyme task
      */
     public function testDeleteTaskNoAuthorUser() {
         $client = $this->getClientAdmin();
 
-        $task = $client->getContainer()->get('doctrine')->getRepository(Task::class)->findOneBy(['title' => 'Test anonyme']);
+        $task = $client->getContainer()->get('doctrine')->getRepository(Task::class)->findOneBy(['title' => 'Test anonyme 2']);
         $taskId = $task->getId();
 
         $client->request('GET', '/tasks/'. $taskId . '/delete');

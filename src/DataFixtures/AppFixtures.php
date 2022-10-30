@@ -97,6 +97,15 @@ class AppFixtures extends Fixture
         $taskUserA->setAuthor($userAnonyme); 
 
         $manager->persist($taskUserA);
+
+        $taskUserA = new Task();
+        $taskUserA->setTitle('Test anonyme 2');
+        $taskUserA->setContent('Test anonyme 2');
+        $taskUserA->setCreatedAt(new \DateTime('now'));
+        $taskUserA->setAuthor($userAnonyme);
+
+        $manager->persist($taskUserA);
+
         $manager->flush();
     }
 }

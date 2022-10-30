@@ -4,7 +4,6 @@ namespace App\Tests\AppBundle\Controller;
 
 use App\Entity\User;
 use App\Tests\AppBundle\Traits\LoginTest;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class UserControllerTest extends WebTestCase
@@ -33,7 +32,6 @@ class UserControllerTest extends WebTestCase
 
     }
 
-    // TODO : Comportement très étrange à voir plus tard
     public function testCreateUserAuthAdminFullData()
     {
         $client = $this->getClientAdmin();
