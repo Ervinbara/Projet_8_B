@@ -10,17 +10,17 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 class TaskVoter extends Voter
 {
     // these strings are just invented: you can use anything
-    const TASK_EDIT = 'task_edit';
-    const TASK_DELETE = 'task_delete';
+    public const TASK_EDIT = 'task_edit';
+    public const TASK_DELETE = 'task_delete';
 
-    private $decisionManager;
+    private AccessDecisionManagerInterface $decisionManager;
 
     public function __construct(AccessDecisionManagerInterface $decisionManager)
     {
         $this->decisionManager = $decisionManager;
     }
 
-    protected function supports($attribute, $task):bool
+    protected function supports(string $attribute, mixed $subject):bool
     {
         // if the attribute isn't one we support, return false
         if (!in_array($attribute, [self::TASK_EDIT, self::TASK_DELETE])) {
@@ -28,7 +28,7 @@ class TaskVoter extends Voter
         }
 
         // Check if task object
-        if (!$task instanceof Task) {
+        if (!$subject instanceof Task) {
             return false;
         }
 
@@ -37,11 +37,11 @@ class TaskVoter extends Voter
 
     /**
      * @param $attribute
-     * @param Task $task
+     * @param Task $subject
      * @param TokenInterface $token
      * @return bool
      */
-    protected function voteOnAttribute($attribute, $task, TokenInterface $token):bool
+    protected function voteOnAttribute($attribute, $subject, TokenInterface $token):bool
     {
         $user = $token->getUser();
 
@@ -50,23 +50,23 @@ class TaskVoter extends Voter
             return false;
         }
 
-        if ($this->decisionManager->decide($token, ['ROLE_ADMIN']) && $task->getAuthor()->getUsername() === "userAnonyme") {
+        if ($this->decisionManager->decide($token, ['ROLE_ADMIN']) && $subject->getAuthor()->getUsername() === "userAnonyme") {
             return true;
         }
         // you know $task is a Post object, thanks to `supports()`
-        /** @var Task $task */
+        /** @var Task $subject */
 
         switch ($attribute) {
             case self::TASK_EDIT:
             case self::TASK_DELETE:
-                return $this->canEdit($task, $user);
+                return $this->canEdit($subject, $user);
         }
 
         throw new \LogicException('This code should not be reached!');
     }
 
 
-    private function canEdit(Task $task, User $user)
+    private function canEdit(Task $task, User $user): bool
     {
         return $user === $task->getAuthor();
     }
