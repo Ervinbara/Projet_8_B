@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use PhpParser\Node\Scalar\String_;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -16,95 +18,147 @@ class Task
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $createdAt;
+    private Datetime $createdAt;
 
     /**
      * @ORM\Column(type="string")
      * @Assert\NotBlank(message="Vous devez saisir un titre.")
      */
-    private $title;
+    private string $title;
 
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank(message="Vous devez saisir du contenu.")
      */
-    private $content;
+    private string $content;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isDone;
+    private bool $done = false;
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="tasks")
      */
-    private $author;
+    private User $author;
 
     public function __construct()
     {
         $this->createdAt = new \Datetime();
-        $this->isDone = false;
     }
 
-    public function getId()
+    /**
+     * @return int
+     */
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getCreatedAt()
+    /**
+     * @param int $id
+     * @return Task
+     */
+    public function setId(int $id): Task
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    /**
+     * @return Datetime
+     */
+    public function getCreatedAt(): Datetime
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt($createdAt)
+    /**
+     * @param Datetime $createdAt
+     * @return Task
+     */
+    public function setCreatedAt(Datetime $createdAt): Task
     {
         $this->createdAt = $createdAt;
+        return $this;
     }
 
-    public function getTitle()
+    /**
+     * @return string
+     */
+    public function getTitle(): string
     {
         return $this->title;
     }
 
-    public function setTitle($title)
+    /**
+     * @param string $title
+     * @return Task
+     */
+    public function setTitle(string $title): Task
     {
         $this->title = $title;
+        return $this;
     }
 
-    public function getContent()
+    /**
+     * @return string
+     */
+    public function getContent(): string
     {
         return $this->content;
     }
 
-    public function setContent($content)
+    /**
+     * @param string $content
+     * @return Task
+     */
+    public function setContent(string $content): Task
     {
         $this->content = $content;
+        return $this;
     }
 
-    public function isDone()
+    /**
+     * @return bool
+     */
+    public function isDone(): bool
     {
-        return $this->isDone;
+        return $this->done;
     }
 
-    public function toggle($flag)
+    /**
+     * @param bool $done
+     * @return Task
+     */
+    public function setDone(bool $done): Task
     {
-        $this->isDone = $flag;
+        $this->done = $done;
+        return $this;
     }
 
-    public function getAuthor()
+    /**
+     * @return User
+     */
+    public function getAuthor(): User
     {
         return $this->author;
     }
 
-    public function setAuthor(User $author)
+    /**
+     * @param User $author
+     * @return Task
+     */
+    public function setAuthor(User $author): Task
     {
         $this->author = $author;
-
         return $this;
     }
+
+
 }

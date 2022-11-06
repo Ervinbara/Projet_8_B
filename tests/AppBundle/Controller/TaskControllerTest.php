@@ -166,4 +166,32 @@ class TaskControllerTest extends WebTestCase
 
     }
 
+    // A retravailler
+    /**
+     * Test toggle task done -
+     */
+    public function testToggleTaskDone()
+    {
+        $client = $this->getClientUser();
+
+        $task = $client->getContainer()->get('doctrine')->getRepository(Task::class)->findOneBy(['done' => 0]);
+        $taskId = $task->getId();
+        $client->request('GET', '/tasks/'. $taskId . '/toggle');
+        $client->followRedirect();
+        $this->assertSelectorExists('.alert.alert-success');
+    }
+
+    /**
+     * Test toggle task undone -
+     */
+    public function testToggleTaskUndone()
+    {
+        $client = $this->getClientUser();
+
+        $task = $client->getContainer()->get('doctrine')->getRepository(Task::class)->findOneBy(['done' => 1]);
+        $taskId = $task->getId();
+        $client->request('GET', '/tasks/'. $taskId . '/toggle');
+        $client->followRedirect();
+        $this->assertSelectorExists('.alert.alert-success');
+    }
 }

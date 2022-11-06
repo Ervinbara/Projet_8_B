@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -21,100 +23,152 @@ class User implements UserInterface,PasswordAuthenticatedUserInterface
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", unique=true)
      * @Assert\NotBlank(message="Vous devez saisir un nom d'utilisateur.")
      */
-    private $username;
+    private string $username;
 
     /**
      * @ORM\Column(type="string")
      */
-    private $password;
+    private string $password;
 
     /**
      * @ORM\Column(type="string", unique=true)
      * @Assert\NotBlank(message="Vous devez saisir une adresse email.")
      * @Assert\Email(message="Le format de l'adresse n'est pas correcte.")
      */
-    private $email;
+    private string $email;
 
 
     /**
      * @ORM\OneToMany(targetEntity="Task", mappedBy="author")
      */
-    private $tasks;
+    private Collection $tasks;
 
     /**
      * @ORM\Column(type="json")
      */
-    private $roles = [];
+    private array $roles = [];
 
-    public function getId()
+    public function __construct()
+    {
+        $this->tasks = new ArrayCollection();
+    }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getUsername()
+    /**
+     * @param int $id
+     * @return User
+     */
+    public function setId(int $id): User
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUsername(): string
     {
         return $this->username;
     }
 
-    public function setUsername($username)
+    /**
+     * @param string $username
+     * @return User
+     */
+    public function setUsername(string $username): User
     {
         $this->username = $username;
+        return $this;
     }
 
-    public function getSalt()
-    {
-        return null;
-    }
-
-    public function getPassword():?string
+    /**
+     * @return string
+     */
+    public function getPassword(): string
     {
         return $this->password;
     }
 
-    public function setPassword($password)
+    /**
+     * @param string $password
+     * @return User
+     */
+    public function setPassword(string $password): User
     {
         $this->password = $password;
+        return $this;
     }
 
-    public function getEmail()
+    /**
+     * @return string
+     */
+    public function getEmail(): string
     {
         return $this->email;
     }
 
-    public function setEmail($email)
+    /**
+     * @param string $email
+     * @return User
+     */
+    public function setEmail(string $email): User
     {
         $this->email = $email;
+        return $this;
     }
 
     /**
-     * @see UserInterface
+     * @return ArrayCollection|Collection
      */
-    public function getRoles():array
-    {
-        return $this->roles;
-    }
-
-    public function setRoles($roles){
-        $this->roles = $roles;
-    }
-
-    public function eraseCredentials()
-    {
-    }
-
-
-    public function getTasks()
+    public function getTasks(): ArrayCollection|Collection
     {
         return $this->tasks;
     }
 
-    public function addTask(Task $task)
+    /**
+     * @param Collection $tasks
+     * @return User
+     */
+    public function setTasks(Collection $tasks): User
+    {
+        $this->tasks = $tasks;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getRoles(): array
+    {
+        return $this->roles;
+    }
+
+    /**
+     * @param array $roles
+     * @return User
+     */
+    public function setRoles(array $roles): User
+    {
+        $this->roles = $roles;
+        return $this;
+    }
+
+
+    public function addTask(Task $task): User
     {
         if (!$this->tasks->contains($task)) {
             $this->tasks[] = $task;
@@ -127,5 +181,9 @@ class User implements UserInterface,PasswordAuthenticatedUserInterface
     public function getUserIdentifier(): string
     {
         return $this->id;
+    }
+
+    public function eraseCredentials(): void
+    {
     }
 }

@@ -87,12 +87,12 @@ class TaskController extends AbstractController
     public function toggleTaskAction(Task $task, EntityManagerInterface $manager)
     {
         if (!$task->isDone()){
-            $task->toggle(!$task->isDone());
+            $task->setDone(!$task->isDone());
             $manager->persist($task);
             $manager->flush();
             $this->addFlash('success', sprintf('La tâche %s a bien été marquée comme faite.', $task->getTitle()));
         } else {
-            $task->toggle(!$task->isDone());
+            $task->setDone(!$task->isDone());
             $manager->persist($task);
             $manager->flush();
             $this->addFlash('success', sprintf('La tâche %s a bien été marquée comme non faite.', $task->getTitle()));
