@@ -9,6 +9,7 @@ use App\Security\TaskVoter;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class TaskController extends AbstractController
@@ -16,7 +17,7 @@ class TaskController extends AbstractController
     /**
      * @Route("/tasks", name="task_list")
      */
-    public function listAction(TaskRepository $repo)
+    public function listAction(TaskRepository $repo):Response
     {
         $tasks = $repo->findAll();
         return $this->render('task/list.html.twig', [
@@ -27,7 +28,7 @@ class TaskController extends AbstractController
     /**
      * @Route("/tasksDone", name="task_done")
      */
-    public function listTasksDone(TaskRepository $repo)
+    public function listTasksDone(TaskRepository $repo):Response
     {
         $tasks = $repo->findBy(['done' => 1]);
         return $this->render('task/listTaskDone.html.twig', ['tasks' => $tasks]);
@@ -36,7 +37,7 @@ class TaskController extends AbstractController
     /**
      * @Route("/tasks/create", name="task_create")
      */
-    public function createAction(Request $request, EntityManagerInterface $manager)
+    public function createAction(Request $request, EntityManagerInterface $manager):Response
     {
         $task = new Task();
         $task->setAuthor($this->getUser());
@@ -59,7 +60,7 @@ class TaskController extends AbstractController
     /**
      * @Route("/tasks/{id}/edit", name="task_edit")
      */
-    public function editAction(Task $task, Request $request, EntityManagerInterface $manager)
+    public function editAction(Task $task, Request $request, EntityManagerInterface $manager):Response
     {
         // On vérifie : Soit ADMIN ou Auteur
         if (!$this->isGranted(taskVoter::TASK_EDIT, $task)) {
@@ -84,7 +85,7 @@ class TaskController extends AbstractController
     /**
      * @Route("/tasks/{id}/toggle", name="task_toggle")
      */
-    public function toggleTaskAction(Task $task, EntityManagerInterface $manager)
+    public function toggleTaskAction(Task $task, EntityManagerInterface $manager):Response
     {
         if (!$task->isDone()){
             $task->setDone(!$task->isDone());
@@ -103,7 +104,7 @@ class TaskController extends AbstractController
     /**
      * @Route("/tasks/{id}/delete", name="task_delete")
      */
-    public function deleteTaskAction(Task $task, EntityManagerInterface $manager)
+    public function deleteTaskAction(Task $task, EntityManagerInterface $manager):Response
     {
         if ($this->isGranted(taskVoter::TASK_DELETE, $task)) {
             $manager->remove($task);
