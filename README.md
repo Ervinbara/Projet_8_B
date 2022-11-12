@@ -13,6 +13,11 @@
 - Composer
 - Un système de gestion de base de données
 
+## Règles à respecter
+- Le nom des fichiers,des classes et des varialbes doivent être en camelCase
+- Le nom des routes doivent être en snake_case
+- Lorsqu'une fonctionnalité est ajouté, lui affiliée un test
+
 ## Mise en place du projet
 
 ### Etape 1 : Clonez ou téléchargez le repository GitHub grâce à la commande :
