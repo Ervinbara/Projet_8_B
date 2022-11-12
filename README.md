@@ -41,6 +41,6 @@ Si vous souhaiter générer un jeu de fausses données basé sur la fixture pré
 
 ## Test de l'application
 
-Si vous souhaitez jouer l'intégralité des tests, il vous faut pour avoir lancer la fixture. 
-Pour lancer les test présent dans le répertoire /tests, executer la commande suivante :
+Si vous souhaitez jouer l'intégralité des tests, il vous faut pour avoir lancé la fixture. 
+Pour lancer les tests présent dans le répertoire /tests, exécuter la commande suivante : 
     - php bin/phpunit
