@@ -1,6 +1,6 @@
-Projet 8 OpenClassrooms : ToDo & Co
+## Projet 8 OpenClassrooms : ToDo & Co
 
-Auteur : Bara Ervin
+## Auteur : Bara Ervin
 
 # L'objectif de ce projet à été d'améliorer une application existante.
 
@@ -21,11 +21,11 @@ Auteur : Bara Ervin
 ### Etape 2 : Configuration des variables d'environnement
     - Configurer les variables d'environnement dans le fichier .env
 
-## Installation des dépendances et création de la base de donnée
+## Installation des dépendances et création de la base de données
 
 ### Etape 1 : Installer les dépendances du projet avec la commande :
     - composer install
-### Etape 2 : Créez la base de donnée avec la commande :
+### Etape 2 : Créez la base de données avec la commande :
     - php bin/console doctrine:database:create
 ### Etape 3 : Lancer la migration pour créer les tables dans la base de données avec la commande :
     - php bin/console doctrine:migrations:migrate
@@ -35,8 +35,8 @@ Auteur : Bara Ervin
 
 ## Générer des fausses données (fixtures)
 
-Les fixtures vont permettre d'initialiser la base avec un jeu de fausse donnée pour si besoin, tester l'application
-Si vous souhaiter générer un jeu de fausses données basé sur la fixture présente dans le projet (AppFixtures.php) utilisez la commande suivante :
+Les fixtures vont permettre d'initialiser la base avec un jeu de fausses données pour si besoin, tester l'application
+Si vous souhaitez générer un jeu de fausses données basé sur la fixture présente dans le projet (AppFixtures.php) utilisez la commande suivante :
     - php bin/console doctrine:fixtures:load
 
 ## Test de l'application
