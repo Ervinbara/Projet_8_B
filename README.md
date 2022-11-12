@@ -1,48 +1,46 @@
 Projet 8 OpenClassrooms : ToDo & Co
 
 Auteur : Bara Ervin
-Badge symfony, code coverage ect ...
 
-L'objectif de ce projet à été d'améliorer une application existante.
+# L'objectif de ce projet à été d'améliorer une application existante.
 
-Explication des différentes partie de l'application : 
-Le projet utilise le model MVC
-Utilisation de doctrine 
-Où sont stocker les view, les repository, les controllers 
-Pour avoir une base de travail, des fixture on été mise en place 
-
-Faire une présentation du projet, comme si tu devais expliquer à un développeur nouveau sur le projet 
-
-Les fixtures vont permettre d'initialiser la base avec un jeu de fausse donnée pour tester l'application
-Fournir les commande, et expliquer à quoi elle servent dans le contexte du projet 
-Comment on lance les test ?
-Si vous voulez jouer les tests, il faut reinitialiser la base commande fixture
-
-Utilisation de : 
+## Utilisation de : 
 - Symfony 6.1
 - PhpUnit
-Pré-requis : 
+## Pré-requis :
+- Git
 - PHP 8.1
 - Composer
 - Un système de gestion de base de données
 
-Installation : 
+## Mise en place du projet : 
 
-Etape 1 : Clonez ou téléchargez le repository GitHub :
+### Etape 1 : Clonez ou téléchargez le repository GitHub grâce à la commande :
     - git clone https://github.com/Ervinbara/Projet_8_B.git
 
-Etape 2 : Configuration des variables d'environnement
-    - Remplir le fichier .env
+### Etape 2 : Configuration des variables d'environnement
+    - Configurer les variables d'environnement dans le fichier .env
 
-Mise en place : 
+## Installation des dépendances et création de la base de donnée : 
 
-Etape 1 : Installer les dépendances du projet avec la commande :
+### Etape 1 : Installer les dépendances du projet avec la commande :
     - composer install
-Etape 2 : Création de la base de donnée :
+### Etape 2 : Créez la base de donnée avec la commande :
     - php bin/console doctrine:database:create
-Etape 3 : Créations des tables dans la base de donnée avec la commande :
+### Etape 3 : Lancer la migration pour créer les tables dans la base de données avec la commande :
     - php bin/console doctrine:migrations:migrate
 
-Commande pour les fixture : 
-- php bin/console doctrine:fixtures:load
-- php bin/console doctrine:fixtures:load --append
+## Pour lancer le serveur vous pouvez utiliser la commande : 
+    - php -S localhost:8000
+
+## Générer des fausses données (fixtures) :
+
+Les fixtures vont permettre d'initialiser la base avec un jeu de fausse donnée pour si besoin, tester l'application
+Si vous souhaiter générer un jeu de fausses données basé sur la fixture présente dans le projet (AppFixtures.php) utilisez la commande suivante :
+    - php bin/console doctrine:fixtures:load
+
+## Test de l'application :
+
+Si vous souhaitez jouer l'intégralité des tests, il vous faut pour avoir lancer la fixture. 
+Pour lancer les test présent dans le répertoire /tests, executer la commande suivante :
+    - php bin/phpunit
