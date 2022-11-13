@@ -5,8 +5,8 @@
 # L'objectif de ce projet à été d'améliorer une application existante
 
 ## Utilisation de 
-*   Symfony 6.1
-    PhpUnit
+* Symfony 6.1
+* PhpUnit
 ## Pré-requis 
     Git
     PHP 8.1
