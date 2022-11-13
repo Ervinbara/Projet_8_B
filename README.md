@@ -31,6 +31,7 @@ Le projet suit les recommandations de Symfony
 ## Mise en place du projet
 
 ### Etape 1 : Clonez ou téléchargez le repository GitHub grâce à la commande
+
     'git clone https://github.com/Ervinbara/Projet_8_B.git'
 
 ### Etape 2 : Configuration des variables d'environnement
