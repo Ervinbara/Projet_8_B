@@ -5,13 +5,13 @@
 # L'objectif de ce projet à été d'améliorer une application existante
 
 ## Utilisation de 
-- Symfony 6.1
-- PhpUnit
+    Symfony 6.1
+    PhpUnit
 ## Pré-requis 
--  Git
--  PHP 8.1
--  Composer
--  Un système de gestion de base de données
+    Git
+    PHP 8.1
+    Composer
+    Un système de gestion de base de données
 
 ## Règles à respecter
 -  Le nom des fichiers,des classes et des varialbes doivent être en camelCase
