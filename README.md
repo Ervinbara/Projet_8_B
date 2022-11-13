@@ -14,14 +14,19 @@
 *  Un système de gestion de base de données
 
 ## Règles à respecter
-*  Le nom des fichiers,des classes et des varialbes doivent être en camelCase
-*  Le nom des routes doivent être en snake_case
-*  Lorsqu'une fonctionnalité est ajoutée, lui affilier un test
+*  Respecter les PSR : PSR 1, PSR 12
+*  On ne peut pas publier une fonctionnalité sans les tests qui couvrent l'ensemble des cas de tests  
 
 ## Architecture du projet
-*  Le projet utilise le model MVC
-*  Les templates de rendu visuel Twig sont stockées dans le dossier templates
-*  ?? utile ??
+* Le projet utilise le model MVC
+### Aaborescence du projet
+Le projet suit les recommandations de Symfony
+* /src/Controllers : Point d'entrée des pages web   
+* /src/DataFixtures : Fichier d'initialisation des datas
+* /src/Entity : Entités de l'application   
+* /src/Form : Formulaires de l'application   
+* /src/Security : Fichiers traitant l'authentification et l'autorisation
+* /templates : Fichiers de rendu visuel
 
 ## Mise en place du projet
 

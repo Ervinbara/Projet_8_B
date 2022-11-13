@@ -13,7 +13,7 @@ class UserControllerTest extends WebTestCase
     public function testAccessCreateUserAuthUser()
     {
         $client = $this->getClientUser();
-        $crawler = $client->request('GET', '/admin/users/create');
+        $client->request('GET', '/admin/users/create');
         $this->assertMatchesRegularExpression('/\//',$client->getResponse()->headers->get('Location'));  
     }
 
