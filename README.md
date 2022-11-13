@@ -5,23 +5,23 @@
 # L'objectif de ce projet à été d'améliorer une application existante
 
 ## Utilisation de 
-* Symfony 6.1
-* PhpUnit
+*  Symfony 6.1
+*  PhpUnit
 ## Pré-requis 
-* Git
-* PHP 8.1
-* Composer
-* Un système de gestion de base de données
+*  Git
+*  PHP 8.1
+*  Composer
+*  Un système de gestion de base de données
 
 ## Règles à respecter
-* Le nom des fichiers,des classes et des varialbes doivent être en camelCase
-* Le nom des routes doivent être en snake_case
-* Lorsqu'une fonctionnalité est ajoutée, lui affilier un test
+*  Le nom des fichiers,des classes et des varialbes doivent être en camelCase
+*  Le nom des routes doivent être en snake_case
+*  Lorsqu'une fonctionnalité est ajoutée, lui affilier un test
 
 ## Architecture du projet
-* Le projet utilise le model MVC
-* Les templates de rendu visuel Twig sont stockées dans le dossier templates
-* ?? utile ??
+*  Le projet utilise le model MVC
+*  Les templates de rendu visuel Twig sont stockées dans le dossier templates
+*  ?? utile ??
 
 ## Mise en place du projet
 
