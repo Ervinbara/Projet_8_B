@@ -13,7 +13,7 @@ body {
 }
 
 .carousel-holder {
-  margin-bottom:  30px;
+  margin-bottom: 30px;
 }
 
 .carousel-control,
@@ -23,7 +23,7 @@ body {
 
 .caption {
   height:  130px;
-  overflow:  hidden;
+  overflow: hidden;
 }
 
 .caption h4 {
@@ -37,7 +37,7 @@ body {
 .ratings {
   padding-right:  10px;
   padding-left:  10px;
-  color:  #d17581;
+  color: #d17581;
 }
 
 .thumbnail {
@@ -45,7 +45,7 @@ body {
 }
 
 .thumbnail .caption-full {
-  padding:  9px;
+  padding: 9px;
   color:  #333;
 }
 
