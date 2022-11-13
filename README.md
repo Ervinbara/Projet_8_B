@@ -68,5 +68,6 @@ php bin/console doctrine:fixtures:load
 Si vous souhaitez jouer l'intégralité des tests, il vous faut pour avoir lancé la fixture. 
 Pour lancer les tests présent dans le répertoire /tests, exécuter la commande suivante : 
 ````
+php bin/console doctrine:fixtures:load
 php bin/phpunit
 ````
