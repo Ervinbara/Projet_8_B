@@ -26,10 +26,10 @@
 ## Mise en place du projet
 
 ### Etape 1 : Clonez ou téléchargez le repository GitHub grâce à la commande
-    * git clone https://github.com/Ervinbara/Projet_8_B.git
+    - git clone https://github.com/Ervinbara/Projet_8_B.git
 
 ### Etape 2 : Configuration des variables d'environnement
-    * Configurer les variables d'environnement dans le fichier .env
+    - Configurer les variables d'environnement dans le fichier .env
 
 ## Installation des dépendances et création de la base de données
 
