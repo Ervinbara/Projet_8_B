@@ -16,7 +16,7 @@
 ## Règles à respecter
 -  Le nom des fichiers,des classes et des varialbes doivent être en camelCase
 -  Le nom des routes doivent être en snake_case
--  Lorsqu'une fonctionnalité est ajouté, lui affiliée un test
+-  Lorsqu'une fonctionnalité est ajoutée, lui affilier un test
 
 ## Architecture du projet
 -  Le projet utilise le model MVC
