@@ -56,7 +56,7 @@ class SecurityControllerTest extends WebTestCase
      */
     public function testAccessToAdminPage()
     {
-        $crawler = $this->client->request('GET', '/admin/users');
+        $this->client->request('GET', '/admin/users');
         $this->assertSame(Response::HTTP_FOUND, $this->client->getResponse()->getStatusCode());
     }
 
