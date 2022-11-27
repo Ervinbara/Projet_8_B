@@ -10,6 +10,20 @@ class UserControllerTest extends WebTestCase
 {
     use LoginTest;
 
+    public function testAccessListUser()
+    {
+        $client = $this->getClientUser();
+        $client->request('GET', '/admin/users');
+        $this->assertMatchesRegularExpression('/\//',$client->getResponse()->headers->get('Location'));
+    }
+
+    public function testAccessListUserWithAdmin()
+    {
+        $client = $this->getClientAdmin();
+        $crawler = $client->request('GET', '/admin/users');
+        $this->assertSame('Liste des utilisateurs', $crawler->filter('h1')->text());
+    }
+
     public function testAccessCreateUserAuthUser()
     {
         $client = $this->getClientUser();
