@@ -20,7 +20,7 @@ class TaskVoter extends Voter
         $this->decisionManager = $decisionManager;
     }
 
-    protected function supports(string $attribute, mixed $subject):bool
+    public function supports(string $attribute, mixed $subject):bool
     {
         // if the attribute isn't one we support, return false
         if (!in_array($attribute, [self::TASK_EDIT, self::TASK_DELETE])) {
@@ -35,7 +35,7 @@ class TaskVoter extends Voter
         return true;
     }
 
-    protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
+    public function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {
         $user = $token->getUser();
 
